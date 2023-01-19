@@ -4,7 +4,6 @@ $(document).ready(function () {
         url: "../api/profil.php",
         dataType: "JSON",
         success: function (response) {
-            alert(1);
             getUser(response[0].login,response[0].profil);
         }
     });
