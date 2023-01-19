@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(rgba(255, 0, 0, 0.644), rgba(255, 166, 0, 0.233));
+}
+
+.discussionZone{
+    width: 80% ;
+    height: 90%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.288);
+}
+
+.messageZone{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    height: 90%;
+    overflow: scroll;
+}
+
+.messageZone::-webkit-scrollbar{
+    display: none;
+}
+
+.messageFrom{
+    width: 200px;
+    min-height: 100px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.733);
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+.messageFromUs{
+    border-bottom-right-radius: 0;
+    align-self: flex-end;
+}
+
+.messageFromOther{
+    border-bottom-left-radius: 0;
+    align-self: flex-start;
+
+}
+
+.messageFrom .message{
+    margin-top: 10px;
+    color: rgb(34, 0, 224);
+    font-weight: bold;
+}
+
+.userInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 5px;
+    background: rgba(255, 0, 0, 0.123);
+    border-radius: 10px 10px 0 0;
+}
+
+.userInfo .profilPic{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.userInfo .profilPic img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.messageFromOther .userInfo{
+    background: rgba(172, 172, 172, 0.644);
+
+}
+
+.messageForm{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.messageForm *{
+    border: none;
+    border-radius: 10px;
+}
+
+.messageForm textarea{
+    width: calc(100% - 100px);
+    height: 50px;
+    outline: none;
+    font-size: 18px;
+    padding: 5px 20px;
+}
+
+.messageForm button{
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    cursor: pointer;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2023 at 01:26 PM
+-- Generation Time: Jan 19, 2023 at 03:04 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -42,6 +42,7 @@ CREATE TABLE `bloquer` (
 CREATE TABLE `message` (
   `idMessage` int(11) NOT NULL,
   `message` text NOT NULL,
+  `lue` tinyint(4) DEFAULT 0,
   `id_sender` int(11) NOT NULL,
   `id_receiver` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -66,13 +67,17 @@ CREATE TABLE `user` (
 -- Indexes for table `bloquer`
 --
 ALTER TABLE `bloquer`
-  ADD PRIMARY KEY (`idBloquer`);
+  ADD PRIMARY KEY (`idBloquer`),
+  ADD KEY `utilisateurBloqueur` (`id_user1`),
+  ADD KEY `utilisateurBloquer` (`id_user2`);
 
 --
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
-  ADD PRIMARY KEY (`idMessage`);
+  ADD PRIMARY KEY (`idMessage`),
+  ADD KEY `envoyeur` (`id_sender`),
+  ADD KEY `recepteur` (`id_receiver`);
 
 --
 -- Indexes for table `user`
@@ -101,6 +106,24 @@ ALTER TABLE `message`
 --
 ALTER TABLE `user`
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bloquer`
+--
+ALTER TABLE `bloquer`
+  ADD CONSTRAINT `utilisateurBloquer` FOREIGN KEY (`id_user2`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateurBloqueur` FOREIGN KEY (`id_user1`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `envoyeur` FOREIGN KEY (`id_sender`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `recepteur` FOREIGN KEY (`id_receiver`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
