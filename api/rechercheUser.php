@@ -1,25 +1,27 @@
 <?php
-    try{
         require("../script/connexion_bd.php");
+    try{
+        
         if(isset($_POST["nom"])){
            $nomUser=htmlspecialchars($_POST["nom"]);
            $search=$bdd->prepare("SELECT * FROM user WHERE login=?");
            $search->execute(array($nomUser)); 
 
            $exist=false;
-           if($user=$search->fetch()){
+           while($user=$search->fetch()){
             $exist=true;
-            $respons[] = array(
+            $response[] = array(
                     "idUser"=>$user['idUser'],
                     "login"=>$user['login'],
                     "profil"=>$user['profil']
-                );  
-           }else{
-            die(header("HTTP/1.1 404 user introuvable"));
+                ); 
+
            }
+           
            if($exist){
-            echo(json_encode($respons));
-            header("HTTP/1.1 200 ok");
+            // var_dump($response);
+            echo(json_encode($response));
+            header("HTTP/1.1 200 ok1");
             }else{
             header("HTTP/1.1 404 erreur");
             }

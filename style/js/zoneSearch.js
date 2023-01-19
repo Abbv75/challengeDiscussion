@@ -12,26 +12,35 @@ let inputVal=$(".searchVal").val();
 $(".searchVal").change(function (e) { 
     e.preventDefault();
     inputVal=$(".searchVal").val();
-    alert(inputVal) 
     return false;
 });
 
-$("search-icon").click(function (e) { 
-    e.preventDefault();
-    alert(inputVal)
+$('#searchbtn').click(function (e) { 
+    if(inputVal!=''){
+        alert(inputVal)
+       recherche(inputVal)
+    }
+    return false;
 });
 
 function recherche(nom){
     $.ajax({
         type: "POST",
         url: "../api/rechercheUser.php",
-        data: nom,
+        data: {
+            "nom":nom
+        },
         dataType: "JSON",
         success: function (response) {
-            
+            for(let res of response){
+                alert(res.login);
+                $("#login").text(res.login);
+                $("#profilImage").attr(src, res.profil);
+            }
         },
         error: function(){
 
         }
     });
 }
+
