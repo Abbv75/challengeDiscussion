@@ -1,0 +1,68 @@
+.navBarZone{
+    z-index: 99;
+    position: fixed;
+    right: 5px;
+    bottom: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.navBarZone *{
+    text-decoration: none;
+}
+
+.navBarZone .navToggler{
+    width: 46px;
+    height: 46px;
+    cursor: pointer;
+    background: linear-gradient(45deg, rgb(252, 229, 181) 30%, rgb(255, 192, 208) 70%);
+}
+
+.navBarZone .navToggler *{
+    transition: all ease-in .15s;
+}
+
+.navBarZone .navToggler, .navBarZone nav i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.navBarZone nav {
+    height: calc(100% - 40px - 20px);
+    background: rgb(211, 211, 211);
+    padding: 5px ;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all ease-in .15s;
+
+}
+
+.navBarZone nav > *{
+    margin-bottom: 10px;
+}
+
+.navBarZone nav i{
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, rgb(252, 229, 181) 30%, rgb(255, 192, 208) 70%);
+    color: black;
+    border: 3px solid white;
+}
+
+.navBarZone .closed{
+    transform: rotate(180deg);
+}
+
+
+.navBarZone .navClosed{
+    width: 3px;
+    padding: 0;
+    filter: blur(10px);
+}
