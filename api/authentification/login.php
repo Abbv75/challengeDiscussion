@@ -1,3 +1,33 @@
+<?php
+session_start();
+
+// Connexion à la base de données
+require("../../script/connexion_bd.php");
+
+
+if (isset($_POST['login']) && isset($_POST['profil'])) {
+    // Récupération des informations de connexion
+    $login = $_POST['login'];
+    $password = $_POST['profil'];
+
+    // Préparation de la requête
+    $stmt = $db->prepare("SELECT * FROM user WHERE login = :login AND profil = :profil");
+    $stmt->bindParam(':login', $login);
+    $stmt->bindParam(':profil', $profil);
+    $stmt->execute();
+
+    // Vérification de la correspondance des informations de connexion
+    if ($stmt->rowCount() > 0) {
+        // Stockage des informations de l'utilisateur dans la session
+        $_SESSION['login'] = $login;
+        $_SESSION['profil'] = $profil;
+        header('Location: dashboard.php');
+    } else {
+        // Affichage d'un message d'erreur
+        echo "Email incorrect";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="Fr">
 <head>
@@ -34,12 +64,9 @@
                 <span class="far fa-envelope"></span>
                 <input type="text" name="userName" id="email" placeholder="Email">
             </div>
-            <button class="btn mt-3">Valider</button>
+           <input type="submit"class="btn mt-3" value="Valider" >
         </form>
        
     </div>
 </body>
-<script src="../../lib/js/confirmation.js"></script>
-<script src="../../lib/js/inscription.js"></script>
-<script src="../../lib/js/authentification.js"></script>
 </html>
